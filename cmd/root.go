@@ -3,8 +3,9 @@ package cmd
 import (
 	"os"
 
-	"github.com/lrypcy/easy_deploy/cmd/db"
-	_ "github.com/lrypcy/easy_deploy/cmd/db"
+	_ "github.com/lrypcy/easy_deploy/cmd/db/mysql"
+	_ "github.com/lrypcy/easy_deploy/cmd/db/postgresql"
+	"github.com/lrypcy/easy_deploy/cmd/db/register"
 	"github.com/spf13/cobra"
 )
 
@@ -44,7 +45,7 @@ func init() {
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
-	for cmd, _ := range db.RegisteredCmd() {
+	for cmd, _ := range register.RegisteredCmd() {
 		rootCmd.AddCommand(cmd)
 	}
 }
